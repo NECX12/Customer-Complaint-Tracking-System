@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design System ─────────────────────────────────────────────── */
+
+:root {
+  --color-brand: 220 90% 56%;
+  --color-brand-light: 220 90% 66%;
+  --color-surface: 222 47% 11%;
+  --color-surface-raised: 222 47% 15%;
+  --color-surface-overlay: 222 47% 18%;
+  --color-border: 222 20% 24%;
+  --color-text-primary: 210 40% 98%;
+  --color-text-secondary: 215 20% 65%;
+  --color-text-muted: 215 15% 45%;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
+}
+
+@layer components {
+  /* Glass cards */
+  .glass-card {
+    @apply bg-gray-900/60 backdrop-blur-xl border border-gray-800/60 rounded-2xl;
+  }
+
+  /* Stat cards with gradient accents */
+  .stat-card {
+    @apply glass-card p-5 relative overflow-hidden transition-all duration-300
+           hover:border-gray-700/80 hover:shadow-lg hover:shadow-blue-500/5
+           hover:-translate-y-0.5;
+  }
+
+  /* Form inputs */
+  .input-field {
+    @apply w-full px-4 py-3 bg-gray-800/50 border border-gray-700/60 rounded-xl
+           text-gray-100 placeholder-gray-500 outline-none transition-all duration-200
+           focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20 focus:bg-gray-800/80;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold
+           rounded-xl shadow-lg shadow-blue-500/25 transition-all duration-200
+           hover:from-blue-500 hover:to-blue-400 hover:shadow-blue-500/40 hover:-translate-y-0.5
+           active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:hover:translate-y-0 disabled:hover:shadow-blue-500/25;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply px-6 py-3 bg-gray-800/60 border border-gray-700/60 text-gray-300 font-medium
+           rounded-xl transition-all duration-200
+           hover:bg-gray-700/60 hover:text-gray-100 hover:border-gray-600/60;
+  }
+
+  /* Danger button */
+  .btn-danger {
+    @apply px-6 py-3 bg-red-600/20 border border-red-500/30 text-red-400 font-medium
+           rounded-xl transition-all duration-200
+           hover:bg-red-600/30 hover:text-red-300;
+  }
+
+  /* Table */
+  .data-table {
+    @apply w-full text-sm text-left;
+  }
+  .data-table thead th {
+    @apply px-4 py-3 text-xs font-semibold uppercase tracking-wider text-gray-400
+           bg-gray-800/40 first:rounded-tl-xl last:rounded-tr-xl border-b border-gray-800/60;
+  }
+  .data-table tbody tr {
+    @apply border-b border-gray-800/40 transition-colors duration-150
+           hover:bg-gray-800/30;
+  }
+  .data-table tbody td {
+    @apply px-4 py-3.5 text-gray-300;
+  }
+
+  /* Sidebar link */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-gray-400 font-medium
+           transition-all duration-200 hover:bg-gray-800/60 hover:text-gray-200;
+  }
+  .sidebar-link.active {
+    @apply bg-blue-600/15 text-blue-400 border border-blue-500/20;
+  }
+}
+
+/* ── Animations ────────────────────────────────────────────────── */
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: fadeIn 0.3s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
