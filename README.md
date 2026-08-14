@@ -1,6 +1,6 @@
 # Mikano Customer Complaint Tracking System
 
-A full-stack complaint management platform built for **Mikano International** — a Nigerian power solutions company dealing in generators, inverters, and electrical systems. The system streamlines how customer complaints are received, assigned, tracked, and resolved across three user roles, with an AI-powered knowledge base that helps support agents resolve issues faster.
+A full-stack complaint management platform —  The system streamlines how customer complaints are received, assigned, tracked, and resolved across three user roles, with an AI-powered knowledge base that helps support agents resolve issues faster.
 
 **Author:** Nwakpa Ejike Chukwuma
 
