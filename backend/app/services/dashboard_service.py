@@ -5,7 +5,7 @@ Each function performs the necessary SQL queries and returns a Pydantic schema
 ready for the route handler to return. This keeps route handlers completely thin.
 
 Design decision: These queries use SQLAlchemy ORM rather than raw SQL for
-readability and safety. For a system at this scale, the ORM overhead is negligible.
+readability and safety.
 """
 
 import uuid

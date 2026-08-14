@@ -6,7 +6,7 @@ Tasks are auto-discovered from app.workers.tasks.
 
 Design decision: Celery was chosen over simpler alternatives (BackgroundTasks,
 threading) because:
-1. It's an industry-standard async task queue — strong interview talking point.
+1. It is an industry-standard async task queue.
 2. Tasks survive server restarts (persisted in Redis).
 3. Independent scaling — workers can run on separate machines.
 4. Built-in retry logic for failed tasks.

@@ -53,5 +53,5 @@ app.include_router(api_v1_router, prefix=settings.API_V1_PREFIX)
 
 @app.get("/health", tags=["System"])
 def health_check():
-    """Health check endpoint for monitoring and Docker health checks."""
+    """Health check endpoint for monitoring and container orchestration."""
     return {"status": "healthy", "service": settings.APP_NAME}

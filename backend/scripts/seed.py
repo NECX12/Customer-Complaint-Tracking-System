@@ -4,8 +4,6 @@ Development seed data script.
 Creates sample users and complaints to demonstrate the system.
 Run with: python -m scripts.seed (from backend/ directory)
 
-⚠️  DEVELOPMENT ONLY — never use these credentials in production.
-
 Default credentials:
   admin@example.com    / admin123
   agent@example.com    / agent123

@@ -1,15 +1,14 @@
 """
 Database session configuration.
 
-Creates the SQLAlchemy engine and session factory. The same engine works for both
-local PostgreSQL (Docker) and Supabase PostgreSQL — only the DATABASE_URL differs.
+Creates the SQLAlchemy engine and session factory.
 
 Design decision: Synchronous SQLAlchemy was chosen over async because:
-1. Simpler to understand and debug (important for interview defensibility).
+1. Simpler to understand and debug.
 2. Performance difference is negligible for this application's scale.
 3. Async SQLAlchemy can be discussed as a future optimization.
 
-pool_pre_ping=True is enabled to handle Supabase connection drops gracefully —
+pool_pre_ping=True is enabled to handle connection drops gracefully —
 the pool verifies each connection is alive before using it.
 """
 
