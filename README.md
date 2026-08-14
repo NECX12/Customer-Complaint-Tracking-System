@@ -1,4 +1,4 @@
-# Mikano Customer Complaint Tracking System
+# Customer Complaint Tracking System
 
 A full-stack complaint management platform —  The system streamlines how customer complaints are received, assigned, tracked, and resolved across three user roles, with an AI-powered knowledge base that helps support agents resolve issues faster.
 
