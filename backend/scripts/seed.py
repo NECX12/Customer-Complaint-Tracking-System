@@ -195,6 +195,35 @@ def seed():
         ))
 
         db.commit()
+
+        # ── Ingest knowledge base into RAG vector store ──────────
+        try:
+            from app.ai.ingest import ingest_knowledge_base, ingest_resolved_complaint
+
+            print("\n🤖 Indexing RAG knowledge base...")
+            kb_result = ingest_knowledge_base()
+            print(f"  ✓ Indexed {kb_result.get('chunks_ingested', 0)} chunks from {kb_result.get('source_files', 0)} documents")
+
+            # Ingest the resolved complaint (c4) into the vector store
+            print("  Ingesting resolved complaints...")
+            ingest_resolved_complaint(
+                complaint_id=str(c4.id),
+                title=c4.title,
+                description=c4.description,
+                resolution_comments=[
+                    "Scheduling noise assessment visit",
+                    "Installed acoustic enclosure. Noise levels now within acceptable range.",
+                ],
+            )
+            print("  ✓ Ingested 1 resolved complaint")
+
+        except ImportError:
+            print("\n⚠️  AI dependencies not installed — skipping RAG indexing.")
+            print("   To enable RAG: pip install chromadb sentence-transformers")
+        except Exception as e:
+            print(f"\n⚠️  RAG indexing failed (non-critical): {e}")
+
+
         print(f"  ✓ Created {5} complaints with status history")
 
         print("\n✅ Seed data created successfully!")

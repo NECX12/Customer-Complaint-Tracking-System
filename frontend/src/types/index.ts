@@ -146,3 +146,32 @@ export const VALID_TRANSITIONS: Record<ComplaintStatus, ComplaintStatus[]> = {
   RESOLVED: ['CLOSED', 'IN_PROGRESS'],
   CLOSED: [],
 };
+
+
+// ── AI / RAG ──────────────────────────────────────────────────
+
+export interface AiSuggestionItem {
+  id: string;
+  content: string;
+  source: string;
+  source_type: 'knowledge_base' | 'resolved_complaint';
+  similarity_score: number;
+  category: string;
+  section?: string;
+}
+
+export interface AiSuggestionResponse {
+  suggestions: AiSuggestionItem[];
+  synthesized_answer: string | null;
+  query_text: string;
+  total_results: number;
+  error?: string;
+}
+
+export interface KnowledgeBaseStatus {
+  total_chunks: number;
+  collection_name: string;
+  last_indexed_at: string | null;
+  persist_directory: string;
+}
+

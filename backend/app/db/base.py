@@ -19,7 +19,7 @@ class Base(DeclarativeBase):
 
 class TimestampMixin:
     """
-    Mixin that adds created_at and updated_at columns to any model.
+    Mixin that adds `created_at` and ``updated_at` columns to any model.
 
     - created_at: set automatically by the database on INSERT
     - updated_at: set automatically on INSERT and updated on every UPDATE

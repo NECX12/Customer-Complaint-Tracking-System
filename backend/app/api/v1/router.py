@@ -7,7 +7,8 @@ without touching main.py.
 
 from fastapi import APIRouter
 
-from app.api.v1 import auth, complaints, users, dashboard
+from app.api.v1 import auth, complaints, dashboard, users
+from app.api.v1.ai import router as ai_router
 
 api_v1_router = APIRouter()
 
@@ -15,3 +16,4 @@ api_v1_router.include_router(auth.router, prefix="/auth", tags=["Authentication"
 api_v1_router.include_router(complaints.router, prefix="/complaints", tags=["Complaints"])
 api_v1_router.include_router(users.router, prefix="/users", tags=["Users"])
 api_v1_router.include_router(dashboard.router, prefix="/dashboard", tags=["Dashboard"])
+api_v1_router.include_router(ai_router, prefix="/ai", tags=["AI / RAG"])

@@ -49,3 +49,15 @@ celerybeat.pid
 .coverage
 htmlcov/
 .pytest_cache/
+
+# ChromaDB — generated vector store, rebuilt by running scripts/ingest.py
+.chroma_db/
+
+# Internal planning and session documents — not part of the application
+agent_summary.md
+rag_implementation_plan.md
+
+# Docker — not required for local development without Docker
+docker-compose.yml
+backend/Dockerfile
+frontend/Dockerfile

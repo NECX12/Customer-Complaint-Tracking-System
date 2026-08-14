@@ -13,6 +13,7 @@ import StatusBadge from '../../components/StatusBadge';
 import PriorityBadge from '../../components/PriorityBadge';
 import Timeline from '../../components/Timeline';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import AiSuggestionPanel from '../../components/AiSuggestionPanel';
 
 // Local copy of the state machine
 const VALID_TRANSITIONS: Record<ComplaintStatus, ComplaintStatus[]> = {
@@ -209,6 +210,12 @@ export default function ComplaintDetail() {
               </div>
             )}
           </div>
+
+
+          {/* AI Suggestion Panel — visible to AGENT and ADMIN only */}
+          {(user?.role === 'AGENT' || user?.role === 'ADMIN') && (
+            <AiSuggestionPanel complaintId={complaint.id} />
+          )}
 
           {/* Timeline */}
           <div className="glass-card p-6">

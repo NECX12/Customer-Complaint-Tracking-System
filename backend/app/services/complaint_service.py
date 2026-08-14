@@ -165,6 +165,38 @@ def update_complaint_status(
         f"Complaint {complaint.id}: {old_status} → {new_status.value} "
         f"by {changed_by.email}"
     )
+
+
+    # ── Auto-ingest into RAG when resolved ──────────────────────
+    if new_status == ComplaintStatus.RESOLVED:
+        try:
+            from app.ai.ingest import ingest_resolved_complaint
+
+            # Gather resolution comments from history
+            history_entries = (
+                db.query(ComplaintStatusHistory)
+                .filter(ComplaintStatusHistory.complaint_id == complaint.id)
+                .order_by(ComplaintStatusHistory.created_at.asc())
+                .all()
+            )
+            resolution_comments = [
+                h.comment for h in history_entries
+                if h.comment and h.new_status in ("RESOLVED", "IN_PROGRESS")
+            ]
+
+            ingest_resolved_complaint(
+                complaint_id=str(complaint.id),
+                title=complaint.title,
+                description=complaint.description,
+                resolution_comments=resolution_comments,
+            )
+            logger.info(f"Complaint {complaint.id} ingested into RAG knowledge base")
+        except ImportError:
+            logger.debug("AI module not available — skipping RAG ingestion")
+        except Exception as e:
+            # Don't fail the complaint update if RAG ingestion fails
+            logger.warning(f"RAG ingestion failed for complaint {complaint.id}: {e}")
+    
     return complaint
 
 
